@@ -1,0 +1,46 @@
+name: wike
+base: core22
+adopt-info: wike
+grade: stable
+confinement: strict
+compression: lzo
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+  
+slots:
+  wike:
+    interface: dbus
+    bus: session
+    name: com.github.hugolabe.Wike
+
+apps:
+  wike:
+    command: usr/bin/wike
+    extensions: [gnome]
+    plugs:
+      - home
+      - audio-playback
+      - raw-usb
+      - network
+      - network-status
+      - network-bind
+      - optical-drive
+      - removable-media
+    common-id: com.github.hugolabe.Wike
+    #desktop: usr/share/applications/
+    
+    
+parts:
+  wike:
+    source: https://github.com/hugolabe/Wike.git
+    plugin: meson
+    parse-info: [usr/share/metainfo/com.github.hugolabe.Wike.metainfo.xml.in]
+    meson-parameters:
+      - -Dprefix=/usr
+    override-pull: |
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=0)
+    
+  
