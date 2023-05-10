@@ -29,14 +29,14 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.github.hugolabe.Wike
-    #desktop: usr/share/applications/
+    desktop: usr/share/applications/com.github.hugolabe.Wike.desktop
     
     
 parts:
   wike:
     source: https://github.com/hugolabe/Wike.git
     plugin: meson
-    parse-info: [usr/share/metainfo/com.github.hugolabe.Wike.metainfo.xml.in]
+    parse-info: [usr/share/metainfo/com.github.hugolabe.Wike.metainfo.xml]
     meson-parameters:
       - -Dprefix=/usr
     override-pull: |
