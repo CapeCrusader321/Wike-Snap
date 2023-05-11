@@ -8,7 +8,11 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
-  
+
+environment:
+  # WORKAROUND: Add python modules in Snap to search path
+  PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
+
 slots:
   wike:
     interface: dbus
@@ -38,9 +42,12 @@ parts:
     plugin: meson
     parse-info: [usr/share/metainfo/com.github.hugolabe.Wike.metainfo.xml]
     meson-parameters:
-      - -Dprefix=/usr
+      - --prefix=/snap/wike/current/usr
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
-    
-  
+    override-build: |
+      craftctl default
+      sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/wike/current/usr/bin/wike
+    organize:
+      snap/wike/current/usr: usr
