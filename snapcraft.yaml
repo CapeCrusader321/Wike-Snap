@@ -11,10 +11,9 @@ architectures:
 layout: 
   /usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
     bind: $SNAP/gnome-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0
-
-environment:
-  # WORKAROUND: Add python modules in Snap to search path
-  PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
+  /usr/bin/python3.10:
+    bind-file: $SNAP/usr/bin/python3.10
+  
 
 slots:
   wike:
@@ -26,6 +25,8 @@ apps:
   wike:
     command: usr/bin/wike
     extensions: [gnome]
+    environment:
+      PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
     plugs:
       - home
       - audio-playback
