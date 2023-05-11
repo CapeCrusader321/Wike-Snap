@@ -9,8 +9,8 @@ architectures:
   - build-on: armhf
   - build-on: arm64
 layout: 
-  /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
-    bind: $SNAP/gnome-platform/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0
+  /usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
+    bind: $SNAP/gnome-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0
 
 environment:
   # WORKAROUND: Add python modules in Snap to search path
