@@ -98,6 +98,7 @@ parts:
       - libglu1-mesa-dev
       - unifdef
       - libxslt-dev
+      - libxt-dev
       
    
       
