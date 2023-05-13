@@ -56,9 +56,18 @@ parts:
       sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/wike/current/usr/bin/wike
     organize:
       snap/wike/current/usr: usr
- 
+  
+  gnu-which:
+    source: https://ftp.gnu.org/gnu/which/which-2.21.tar.gz
+    plugin: make
+    make-parameters:
+      - --prefix=/usr
+    build-packages:
+      - build-essential
+    
   webkit:
     source: https://webkitgtk.org/releases/webkitgtk-2.38.6.tar.xz
+    after: [gnu-which]
     plugin: cmake
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
@@ -97,7 +106,7 @@ parts:
       - libegl1-mesa-dev
       - libglu1-mesa-dev
       - unifdef
-      - gnu-which
+      
    
       
       
