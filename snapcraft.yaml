@@ -57,17 +57,8 @@ parts:
     organize:
       snap/wike/current/usr: usr
   
-  gnu-which:
-    source: https://ftp.gnu.org/gnu/which/which-2.21.tar.gz
-    plugin: make
-    make-parameters:
-      - -prefix=/usr
-    build-packages:
-      - build-essential
-    
   webkit:
     source: https://webkitgtk.org/releases/webkitgtk-2.38.6.tar.xz
-    after: [gnu-which]
     plugin: cmake
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
