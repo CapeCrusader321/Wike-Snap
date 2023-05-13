@@ -73,8 +73,7 @@ parts:
       - -DUSE_WOFF2=OFF             
       - -DUSE_GTK4=ON               
       - -DUSE_WPE_RENDERER=ON       
-      - -DENABLE_JOURNALD_LOG=OFF   
-      - -DENABLE_BUBBLEWRAP_SANDBOX=OFF 
+      - -DENABLE_JOURNALD_LOG=OFF
       - -Wno-dev -G Ninja  
     build-snaps:
       - cmake
@@ -99,6 +98,8 @@ parts:
       - unifdef
       - libxslt-dev
       - libxt-dev
+      - bubblewrap
+      - xdg-dbus-proxy
       
    
       
