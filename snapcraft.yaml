@@ -11,10 +11,7 @@ architectures:
 layout: 
   /usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
     bind: $SNAP/gnome-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0
-  /usr/bin/python3.10:
-    bind-file: $SNAP/usr/bin/python3.10
   
-
 slots:
   wike:
     interface: dbus
@@ -55,13 +52,6 @@ parts:
       sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/wike/current/usr/bin/wike
     organize:
       snap/wike/current/usr: usr
-    stage-packages:
-      - libwebkit2gtk-4.1-0
-  
-      
-      
-   
-      
-      
+    
       
       
