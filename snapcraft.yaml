@@ -43,7 +43,6 @@ apps:
 parts:
   wike:
     source: https://github.com/hugolabe/Wike.git
-    after: [webkit]
     plugin: meson
     parse-info: [usr/share/metainfo/com.github.hugolabe.Wike.metainfo.xml]
     meson-parameters:
@@ -56,53 +55,9 @@ parts:
       sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/wike/current/usr/bin/wike
     organize:
       snap/wike/current/usr: usr
+    stage-packages:
+      - libwebkit2gtk-4.1-0
   
-  webkit:
-    source: https://webkitgtk.org/releases/webkitgtk-2.38.6.tar.xz
-    plugin: cmake
-    cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DCMAKE_SKIP_RPATH=ON
-      - -DPORT=GTK    
-      - -DLIB_INSTALL_DIR=/usr/lib  
-      - -DUSE_LIBHYPHEN=OFF         
-      - -DENABLE_GAMEPAD=OFF        
-      - -DENABLE_MINIBROWSER=ON     
-      - -DENABLE_DOCUMENTATION=OFF  
-      - -DUSE_WOFF2=OFF             
-      - -DUSE_GTK4=ON               
-      - -DUSE_WPE_RENDERER=ON       
-      - -DENABLE_JOURNALD_LOG=OFF
-      - -Wno-dev -G Ninja  
-    build-snaps:
-      - cmake
-      - ruby
-    build-packages:
-      - build-essential
-      - libsecret-1-dev
-      - libcairo2-dev
-      - libopenjp2-7-dev
-      - libgudev-1.0-dev
-      - sqlite3
-      - libenchant-2-voikko
-      - libwebp-dev
-      - libsoup-3.0-dev
-      - libtasn1-6-dev
-      - libwpebackend-fdo-1.0-dev
-      - libgeoclue-2-dev
-      - hicolor-icon-theme
-      - libavif-dev
-      - libegl1-mesa-dev
-      - libglu1-mesa-dev
-      - unifdef
-      - libxslt-dev
-      - libxt-dev
-      - bubblewrap
-      - xdg-dbus-proxy
-      - libgstreamer1.0-dev
-      - libgstreamer-plugins-base1.0-dev
-      - gperf
       
       
    
