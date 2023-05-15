@@ -8,10 +8,7 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
-layout: 
-  /usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0:
-    bind: $SNAP/gnome-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkit2gtk-4.0
-  
+
 slots:
   wike:
     interface: dbus
@@ -22,8 +19,6 @@ apps:
   wike:
     command: usr/bin/wike
     extensions: [gnome]
-    environment:
-      PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
     plugs:
       - home
       - audio-playback
@@ -43,16 +38,8 @@ parts:
     plugin: meson
     parse-info: [usr/share/metainfo/com.github.hugolabe.Wike.metainfo.xml]
     meson-parameters:
-      - --prefix=/snap/wike/current/usr
+      - -prefix=/usr
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
-    override-build: |
-      craftctl default
-      sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/wike/current/usr/bin/wike
-    organize:
-      snap/wike/current/usr: usr
-    stage-packages:
-      - gir1.2-webkit2-4.1
-      
       
