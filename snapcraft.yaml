@@ -53,3 +53,5 @@ parts:
       sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/wike/current/usr/bin/wike
     organize:
       snap/wike/current/usr: usr  
+    stage-packages:
+      - gir1.2-webkit2-4.1
