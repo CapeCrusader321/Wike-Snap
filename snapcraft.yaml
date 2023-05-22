@@ -12,7 +12,7 @@ layout:
   /usr/lib/x86_64-linux-gnu/webkit2gtk-4.1:
      bind: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1
   /usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so:
-     bind: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so
+     symlink: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so
 
 environment:
   # WORKAROUND: Add python modules in Snap to search path
