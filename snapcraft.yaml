@@ -8,11 +8,15 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
+layout:
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.1:
+     bind: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1
+  /usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so:
+     bind: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so
 
 environment:
   # WORKAROUND: Add python modules in Snap to search path
   PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
-
 
 slots:
   wike:
@@ -35,8 +39,7 @@ apps:
       - removable-media
     common-id: com.github.hugolabe.Wike
     desktop: usr/share/applications/com.github.hugolabe.Wike.desktop
-    
-    
+        
 parts:
   wike:
     source: https://github.com/hugolabe/Wike.git
