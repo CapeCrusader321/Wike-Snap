@@ -6,8 +6,7 @@ confinement: strict
 compression: lzo
 architectures:
   - build-on: amd64
-  - build-on: armhf
-  - build-on: arm64
+    build-for: amd64
 layout:
   /usr/lib/$CRAFT_ARCH_TRIPLET-linux-gnu/webkit2gtk-4.1:
      bind: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1
