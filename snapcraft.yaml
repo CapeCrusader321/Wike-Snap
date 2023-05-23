@@ -43,6 +43,7 @@ apps:
 parts:
   wike:
     source: https://github.com/hugolabe/Wike.git
+    after: [webkit]
     plugin: meson
     parse-info: [usr/share/metainfo/com.github.hugolabe.Wike.metainfo.xml]
     meson-parameters:
@@ -57,3 +58,78 @@ parts:
     organize:
       snap/wike/current/usr: usr  
     
+  webkit:
+    source: https://webkitgtk.org/releases/webkitgtk-2.40.1.tar.xz
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_SKIP_RPATH=ON
+      - -DPORT=GTK    
+      - -DLIB_INSTALL_DIR=/usr/lib  
+      - -DUSE_LIBHYPHEN=OFF         
+      - -DENABLE_GAMEPAD=OFF        
+      - -DENABLE_MINIBROWSER=ON     
+      - -DENABLE_DOCUMENTATION=OFF  
+      - -DUSE_WOFF2=OFF             
+      - -DUSE_GTK4=ON               
+      - -DUSE_WPE_RENDERER=ON       
+      - -DENABLE_JOURNALD_LOG=OFF
+      - -Wno-dev -G Ninja  
+    build-snaps:
+      - cmake
+      - ruby
+      - ubuntu-make
+    build-packages:
+      - ccache
+      - bubblewrap
+      - xdg-dbus-proxy
+      - libseccomp-dev
+      - jdupes
+      - libglib2.0-dev
+      - libharfbuzz-dev
+      - libcairo2-dev
+      - libfontconfig-dev
+      - libfreetype-dev
+      - libicu-dev
+      - libgcrypt20-dev
+      - libhyphen-dev
+      - liblcms2-dev
+      - libmanette-0.2-dev
+      - libxslt1-dev
+      - libxml2-dev
+      - libsoup2.4-dev
+      - libsoup-3.0-dev
+      - libgtk-3-dev
+      - libgtk-4-dev
+      - libsqlite3-dev
+      - libsystemd-dev
+      - libgudev-1.0-dev
+      - libwoff-dev
+      - libwpebackend-fdo-1.0-dev
+      - gperf
+      - bison
+      - flex
+      - unifdef
+      - libavif-dev
+      - libjpeg-dev
+      - libopenjp2-7-dev
+      - libpng-dev
+      - libtasn1-6-dev
+      - libwebp-dev
+      - libxt-dev
+      - libgstreamer1.0-dev
+      - libgstreamer-plugins-base1.0-dev
+      - libgstreamer-plugins-bad1.0-dev
+      - libenchant-2-dev
+      - libsecret-1-dev
+      - gobject-introspection
+      - libgirepository1.0-dev
+      - libegl-dev
+      - libgl-dev
+      - libgles-dev
+    override-build: |
+      craftctl default
+      rm -rf * .[^.]*
+      sed '/m_brush =/s/{/Brush {/' \
+          -i Source/WebCore/platform/graphics/SourceBrush.cpp
