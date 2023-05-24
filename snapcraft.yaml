@@ -7,15 +7,6 @@ compression: lzo
 architectures:
   - build-on: amd64
     build-for: amd64
-layout:
-  /usr/lib/$CRAFT_ARCH_TRIPLET-linux-gnu/webkit2gtk-4.1:
-     bind: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1
-  /usr/lib/$CRAFT_ARCH_TRIPLET-linux-gnu/libwebkit2gtk-4.1.so:
-     symlink: $SNAP/gnome-platform/usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so
-
-environment:
-  # WORKAROUND: Add python modules in Snap to search path
-  PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
 
 slots:
   wike:
@@ -27,10 +18,11 @@ apps:
   wike:
     command: usr/bin/wike
     extensions: [gnome]
+    environement:
+      PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
     plugs:
       - home
       - audio-playback
-      - raw-usb
       - network
       - network-status
       - network-bind
@@ -127,12 +119,8 @@ parts:
       - libegl-dev
       - libgl-dev
       - libgles-dev
-      - gcc-9
-      - gcc-9-base
     override-build: |
       craftctl default
-      export CC=/usr/local/bin/gcc 
-      export CXX=/usr/local/bin/g++
       rm -rf * .[^.]*
       sed '/m_brush =/s/{/Brush {/' \
           -i Source/WebCore/platform/graphics/SourceBrush.cpp
