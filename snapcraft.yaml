@@ -7,7 +7,7 @@ compression: lzo
 architectures:
   - build-on: amd64
   - build-on: arm64
-  - build-on: arm64
+  - build-on: armhf
 
 layout:
   /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.1:
